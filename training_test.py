@@ -1,7 +1,7 @@
 from Neuron.Neuron import Neuron
 
 
-neuron = Neuron(2)
+neuron = Neuron(2, 1)
 
 # Inputs
 input1 = [1, 1]
@@ -10,7 +10,7 @@ input2 = [0, 0]
 
 # Desirable Outputs
 output1 = 1
-output2 = -1
+output2 = 0
 
 print(f"Input1 {input1} with desirable output: {output1}")
 print(f"Input2 {input2} with desirable output: {output2}")
@@ -55,7 +55,7 @@ print("Trained")
 print(f"Training amount: {training_amount}")
 print("-" * 40)
 
-
+    
 print(f"Neuron output1 : {neuron.add_input(input1)}")
 print(f"Neuron output2 : {neuron.add_input(input2)}")
 print(f"Neuron weight list: {neuron.weight_list}")
