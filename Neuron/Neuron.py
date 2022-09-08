@@ -45,6 +45,12 @@ class Neuron:
     # NEED to think about how to train the AI in a better structured and flexible way
     # Create another class called network and have a network.train() method?
 
+    def adjust_weights(self, input_list: list, desirable_value: float) -> None:
+        obtained_value = self.add_input(input_list)
+        
+        for i in range(self.input_amount):
+            self.weight_list[i] += 1 * (desirable_value - obtained_value) * input_list[i] 
+
     # def train(self, input_list: list, desirable_value: float) -> None:
         # """Train the neuron to return desirable_value
 #
