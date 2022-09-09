@@ -25,17 +25,26 @@ neuron = Neuron(400)
 # Downscale value
 img_px = 20
 
-data_set = [
-    [convert_image("TrainingData/LetterA/a.jpg", img_px), 1],
-    [convert_image("TrainingData/LetterB/b.jpg", img_px), 0]
+training_set = [
+    [convert_image("Data/TrainingData/LetterA/a.jpg", img_px), 1],
+    [convert_image("Data/TrainingData/LetterB/b.jpg", img_px), 0]
 ]
 
 
+prediction_data = [
+    [convert_image("Data/PredictionData/LetterA/a2.png", img_px)],
+    [convert_image("Data/PredictionData/LetterA/a3.png", img_px)],
+]
+
+
+
 def main():
-    network.print_outputs(neuron, data_set)
-    network.train_neuron(neuron, data_set)
+    network.print_outputs(neuron, training_set)
+    network.train_neuron(neuron, training_set)
     print("Neuron Trained")
-    network.print_outputs(neuron, data_set)
+    network.print_outputs(neuron, training_set)
+    print("Predictions")
+    network.print_outputs(neuron, prediction_data)
 
 
 if __name__ == "__main__":
