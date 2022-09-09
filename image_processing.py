@@ -8,16 +8,17 @@ def average(tuple_data: tuple) -> float:
 
 im = Image.open("godot_image")
 
-# im.show()
 
 processed_image = im.resize((20, 20))
 
 image_data = list(processed_image.getdata())
 
-print(image_data[10])
+bit_image = []
+for pixel in image_data:
+    color_average = average(pixel)
 
-print(len(image_data))
+    value = 1 if color_average >= 127.5 else 0
 
-print(average(image_data[10]))
+    bit_image.append(value)
 
-# print(processed_image.histogram())
+print(bit_image)
