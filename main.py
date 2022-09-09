@@ -2,7 +2,7 @@ from Neuron.Neuron import Neuron
 from image_processing import convert_image
 import single_neuron_network as network
 
-neuron = Neuron(400)
+neuron = Neuron(1024)
 
 
 #  Testing Data
@@ -23,7 +23,7 @@ neuron = Neuron(400)
 # Image testing
 
 # Downscale value
-img_px = 20
+img_px = 32
 
 training_set = [
     [convert_image("Data/TrainingData/LetterA/a.jpg", img_px), 1],
@@ -35,7 +35,6 @@ prediction_data = [
     [convert_image("Data/PredictionData/LetterA/a2.png", img_px)],
     [convert_image("Data/PredictionData/LetterA/a3.png", img_px)],
 ]
-
 
 
 def main():
