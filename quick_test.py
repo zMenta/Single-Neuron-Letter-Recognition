@@ -20,8 +20,8 @@ data_set = [
 neuron.weight_list = [0, 0]
 
 
-def test_outputs():
-    for input_set in data_set:
+def test_outputs(_data_set: list):
+    for input_set in _data_set:
         print(neuron.return_output(input_set[0]))
 
 
@@ -31,7 +31,7 @@ def weight_adjustment(_neuron: Neuron, input_list: list, obtained_value, desirab
             (desirable_value - obtained_value) * input_list[i]
 
 
-def train_neuron():
+def train_neuron(_neuron: Neuron):
     need_adjust = True
     while need_adjust:
         need_adjust = False
@@ -41,15 +41,15 @@ def train_neuron():
             output = neuron.return_output(data[0])
             # data[1] = desired output of the specific data set.
             if output != desired_output:
-                weight_adjustment(neuron, data[0], output, desired_output)
+                weight_adjustment(_neuron, data[0], output, desired_output)
                 need_adjust = True
 
 
 def main():
-    test_outputs()
-    train_neuron()
+    test_outputs(data_set)
+    train_neuron(neuron)
     print("Neuron Trained")
-    test_outputs()
+    test_outputs(data_set)
 
 
 if __name__ == "__main__":
