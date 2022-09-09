@@ -1,72 +1,43 @@
-import Neuron.sum_functions as sf
 
-
-class Neuron:
-    def __init__(self, input_amount: int = 1, function_type: int = 0) -> None:
-        self.input_amount = input_amount
-        self.function_type = function_type
-
+class Neuron():
+    def __init__(self, input_amount: int = 1, bias: float = 0) -> None:
+        """
+        Args:
+            input_amount (int): Amount of inputs that the neuron can receive. Defaults to 1.
+            bias (float): Bias amount of the neuron. Defaults to 0
+        """
         if input_amount <= 0:
-            self.input_amount = 1
+            raise Exception("input_amount must be > 0.")
 
+        self.input_amount = input_amount
+        self.bias = bias
         self.weight_list = [0] * input_amount
 
-    def add_input(self, input_list: list) -> float:
-        """Add inputs to the neuron.
+    def _sum_function(self, input_list: list) -> float:
+        """Returns the sum value(float) of input_list[n] * weight_list[n].
 
         Args:
-            input_list (list): List of inputs. Must be the same size of the weight_list or input_amount
-            function_type (int, optional): Select sum function to be used. Defaults to 0.
+            input_list (list: floats): Input list of values to calculate
 
         Returns:
-            float: Calculated value
+            float: sum value
         """
 
-        if type(input_list) != list:
-            raise Exception("Input_list is not a list")
+        if type(input_list) is not list:
+            raise Exception("input_list is not a list")
 
         if len(input_list) != len(self.weight_list):
             raise Exception(
-                "Input_list length is not the same as weight_list length")
+                "Length of input_list and weight_list are not the same length.")
 
-        _input_sum: float = 0
-        for i in range(len(self.weight_list)):
-            _input_sum += self.weight_list[i] * input_list[i]
+        sum_value = self.bias
+        for i in range(len(input_list)):
+            sum_value += input_list[i] * self.weight_list[i]
 
-        if self.function_type == 0:
-            return sf.fastLimit(_input_sum)
-        elif self.function_type == 1:
-            return sf.rampFunction(_input_sum)
-        elif self.function_type == 2:
-            return sf.sigmoidFunction(_input_sum)
+        return sum_value
 
-        raise Exception("Invalid function_type value")
+    def _activation(self, sum_value: float) -> int:
+        return 1 if sum_value > 0 else 0
 
-    # NEED to think about how to train the AI in a better structured and flexible way
-    # Create another class called network and have a network.train() method?
-
-    def adjust_weights(self, input_list: list, desirable_value: float) -> None:
-        obtained_value = self.add_input(input_list)
-        
-        for i in range(self.input_amount):
-            self.weight_list[i] += 1 * (desirable_value - obtained_value) * input_list[i] 
-
-    # def train(self, input_list: list, desirable_value: float) -> None:
-        # """Train the neuron to return desirable_value
-#
-        # Args:
-        # input_list (list): List containing the inputs to the neuron.
-        # desirable_value (float): Desirable value that you want to train the neuron to return on add_input().
-        # """
-#
-        # obtained_value = self.add_input(input_list)
-#
-        # for i in range(self.input_amount):
-        # self.weight_list[i] = self.weight_list[i] + 1 * (desirable_value -
-        #  obtained_value) * input_list[i]
-#
-        # need_adjusts = True
-        # while need_adjusts:
-        # need_adjusts = False
-        #
-        #
+    def return_output(self, input_list: list) -> int:
+        return self._activation(self._sum_function(input_list))
