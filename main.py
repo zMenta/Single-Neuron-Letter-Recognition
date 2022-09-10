@@ -1,6 +1,7 @@
 from Neuron.Neuron import Neuron
 from image_processing import convert_image
 import single_neuron_network as network
+from data_processing import generate_data
 
 neuron = Neuron(1024)
 
@@ -24,6 +25,10 @@ neuron = Neuron(1024)
 
 # Downscale value
 img_px = 32
+
+set_letter_A = generate_data("Data/TrainingData/LetterA/", 1, img_px)
+set_letter_B = generate_data("Data/TrainingData/LetterB/", 0, img_px)
+
 
 training_set = [
     [convert_image("Data/TrainingData/LetterA/a.jpg", img_px), 1],
