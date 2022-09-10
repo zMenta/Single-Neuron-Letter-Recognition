@@ -2,6 +2,9 @@ from PIL import Image
 
 
 def average(tuple_data: tuple) -> float:
+    if type(tuple_data) != tuple:
+        return tuple_data
+
     return sum(tuple_data) / len(tuple_data)
 
 
@@ -23,8 +26,8 @@ def convert_image(image_path: str, resize_value: int) -> list:
     for pixel in image_data:
         color_average = average(pixel)
         # 127.7 = 255 / 2
-        value = 1 if color_average >= 127.5 else 0
+        # value = 1 if color_average >= 127.5 else 0
 
-        bit_image.append(value)
+        bit_image.append(color_average)
 
     return bit_image
