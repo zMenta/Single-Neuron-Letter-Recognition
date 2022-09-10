@@ -25,6 +25,6 @@ def convert_image(image_path: str, resize_value: int) -> list:
         # 127.7 = 255 / 2
         value = 1 if color_average >= 127.5 else 0
 
-        bit_image.append(color_average)
+        bit_image.append(value)
 
     return bit_image
