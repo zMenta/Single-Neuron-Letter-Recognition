@@ -1,8 +1,9 @@
 from Neuron.Neuron import Neuron
 from image_processing import convert_image
 import single_neuron_network as network
+from data_processing import generate_data
 
-neuron = Neuron(1024)
+neuron = Neuron(1296)
 
 
 #  Testing Data
@@ -23,27 +24,27 @@ neuron = Neuron(1024)
 # Image testing
 
 # Downscale value
-img_px = 32
+img_px = 36
 
-training_set = [
-    [convert_image("Data/TrainingData/LetterA/a.jpg", img_px), 1],
-    [convert_image("Data/TrainingData/LetterB/b.jpg", img_px), 0]
-]
+set_letter_A = generate_data("Data/TrainingData/LetterA/", 1, img_px)
+set_letter_B = generate_data("Data/TrainingData/LetterB/", 0, img_px)
 
 
-prediction_data = [
-    [convert_image("Data/PredictionData/LetterA/a2.png", img_px)],
-    [convert_image("Data/PredictionData/LetterA/a3.png", img_px)],
-]
+training_data = set_letter_A + set_letter_B
+
+prediction_letter_A = generate_data("Data/PredictionData/LetterA/", 1, img_px)
+prediction_letter_B = generate_data("Data/PredictionData/LetterB/", 0, img_px)
 
 
 def main():
-    network.print_outputs(neuron, training_set)
-    network.train_neuron(neuron, training_set)
+    network.train_neuron(neuron, training_data)
     print("Neuron Trained")
-    network.print_outputs(neuron, training_set)
+    # network.print_outputs(neuron, training_data)
     print("Predictions")
-    network.print_outputs(neuron, prediction_data)
+    print("-Letter A = 1")
+    network.print_outputs(neuron, prediction_letter_A)
+    print("-Letter B == 0")
+    network.print_outputs(neuron, prediction_letter_B)
 
 
 if __name__ == "__main__":
