@@ -1,4 +1,4 @@
-from PIL import Image
+from PIL import Image, ImageOps
 
 
 def average(tuple_data: tuple) -> float:
