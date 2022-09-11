@@ -1,4 +1,4 @@
-from PIL import Image, ImageOps
+from PIL import Image
 
 
 def average(tuple_data: tuple) -> float:
@@ -25,9 +25,9 @@ def convert_image(image_path: str, resize_value: int) -> list:
     bit_image = []
     for pixel in image_data:
         color_average = average(pixel)
-        # 127.7 = 255 / 2
-        # value = 1 if color_average >= 127.5 else 0
+        # 127.5 = 255 / 2
+        value = 1 if color_average <= 127.5 else 0
 
-        bit_image.append(color_average)
+        bit_image.append(value)
 
     return bit_image

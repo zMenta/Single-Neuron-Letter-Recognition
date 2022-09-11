@@ -25,13 +25,15 @@ def weight_adjustment(_neuron: Neuron, input_list: list, obtained_value, desirab
             (desirable_value - obtained_value) * input_list[i]
 
 
-def train_neuron(_neuron: Neuron, _data_set: list):
+def train_neuron(_neuron: Neuron, _data_set: list, show_progress: bool = True):
     """Train the neuron to the desired output.
 
     Args:
         _neuron (Neuron): Neuron that will be trained
         _data_set (List): List containing [ [input_list1, desired_output2] ... [input_listN, desired_outputN] ]
+        show_progress (bool): Prints the amount of training passes
     """
+    training_amount = 0
     need_adjust = True
     while need_adjust:
         need_adjust = False
@@ -43,3 +45,7 @@ def train_neuron(_neuron: Neuron, _data_set: list):
             if output != desired_output:
                 weight_adjustment(_neuron, data[0], output, desired_output)
                 need_adjust = True
+
+        if show_progress:
+            print(f"Training... {training_amount}")
+            training_amount += 1
